@@ -1,6 +1,25 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex: 1;
 }
+
+.ControlDiv{
+  width: 20%;
+  height: 100%;
+  align-self: flex-start;
+  background-color: yellow;
+}
+.ContentDiv{
+  width: 80%;
+  height: 100%;
+  align-self: flex-end;
+  background-color: green;
+}
+
+.TextHeader{
+  color: blue;
+}
+
 
 .App-logo {
   height: 40vmin;
