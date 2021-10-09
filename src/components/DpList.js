@@ -3,8 +3,14 @@ import './../styles/DpList.css';
 
 export default class DpList extends Component{
     state = {
-        names: []
+        names: [],
+        type: 0
     }
+
+    constructor(props){
+        super(props);
+    }
+
     getNames(cbNames){
         fetch("http://my-develop.ddns.net/names.php")
             .then(raw => {
@@ -15,17 +21,21 @@ export default class DpList extends Component{
     }
 
     componentDidMount(){
-        console.log('component dud mount');
-        this.getNames((response)=>{
-            // console.log(response);
-            this.setState({names:response.names});
-        });
+        console.log("component did mount");
     }
     componentDidUpdate(){
-        console.log('component did update');
+        if(this.state.type !== this.props.type){
+            this.getNames((response)=>{
+                this.setState(
+                    {
+                        names:response.names,
+                        type: this.props.type
+                    });
+            });
+        }
     }
+    
     render(){
-        console.log(this.state);
         return(
             <div className="DpListContainer">
                 <ul>

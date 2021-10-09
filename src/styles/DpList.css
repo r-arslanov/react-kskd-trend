@@ -1,4 +1,5 @@
 .DpListContainer{
     /* height: max-content; */
     background-color: violet;
+    width: fit-content;
 }
