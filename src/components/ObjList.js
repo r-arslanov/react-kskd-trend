@@ -11,7 +11,6 @@ export default class ObjList extends Component{
 
 	getTypes(cbTypes){
 		let url = "http://my-develop.ddns.net/types.php";
-		
 		fetch(url,{
 			method: "GET"
 		}).then(raw =>{
@@ -34,10 +33,10 @@ export default class ObjList extends Component{
 				{this.state.types.map(
 					(type) => {
 						return(
-							<ObjButton onClick={() => this.props.bindClick(type)} text={type} key={type}/>
+							<ObjButton onClick={() => this.props.bindClick(type.type)} text={type.name} key={type.type}/>
 						)
 					})
-					}
+				}
 			</div>
 		);
 	}

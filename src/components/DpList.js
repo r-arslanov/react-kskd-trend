@@ -15,10 +15,21 @@ export default class DpList extends Component{
 		}).then(raw => {
 				return raw.json();
 			}).then(response=>{
+				response.names.forEach((name, index) => {
+					response.names[index].enabled = false;
+				});
 				cbNames(response);
 			});
 	}
 	
+	updChecked(index){
+		// let loc_ind = parseInt(index);
+		let tmp = this.state.names;
+		// console.log(tmp[loc_ind]);
+		tmp[index].enabled = !this.state.names[index].enabled;
+		this.setState({names:tmp});
+	}
+
 	componentDidUpdate(){
 		if(this.state.type !== this.props.type){
 			this.getNames((response)=>{
@@ -26,13 +37,13 @@ export default class DpList extends Component{
 			});
 		}
 	}
-
+	
 	render(){
 		console.log(this.state);
 		return(
 			<div className="DpListContainer">
 				<ul>
-					{this.state.names.map(dp => <li key={dp.name} >{dp.name}</li> )}
+					{this.state.names.map((dp, index) => <li key={index}> <input type="checkbox" checked={this.state.names[index].enabled} onChange={() => this.updChecked(index)}/> {dp.name} </li> )}
 				</ul>
 			</div>
 		);
