@@ -4,17 +4,41 @@ import ObjButton from './ObjButton';
 import './../styles/ObjList.css';
 
 export default class ObjList extends Component{
-    constructor(props){
-        super(props);
-    }
-    render(){
-        return(
-            <div className="ObjListContainer">
-                <ObjButton onClick={() => this.props.bindClick(1)} text="One" />
-                <ObjButton onClick={() => this.props.bindClick(2)} text="two" />
-                <ObjButton onClick={() => this.props.bindClick(3)} text="three" />
-                <ObjButton onClick={() => this.props.bindClick(4)} text="four" />
-            </div>
-        );
-    }
+	
+	state = {
+		types:[]
+	}
+
+	getTypes(cbTypes){
+		let url = "http://my-develop.ddns.net/types.php";
+		
+		fetch(url,{
+			method: "GET"
+		}).then(raw =>{
+			return raw.json();
+		}).then(response=>{
+			cbTypes(response);
+		});
+	}
+
+	componentDidMount(){
+		this.getTypes(response=>{
+			this.setState({types:response.types});
+		});
+	}
+
+	render(){
+		console.log(this.state);
+		return(
+			<div className="ObjListContainer">
+				{this.state.types.map(
+					(type) => {
+						return(
+							<ObjButton onClick={() => this.props.bindClick(type)} text={type} key={type}/>
+						)
+					})
+					}
+			</div>
+		);
+	}
 }
