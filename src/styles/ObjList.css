@@ -1,0 +1,6 @@
+.ObjListContainer{
+    display: flex;
+    flex-wrap: wrap;
+    height: 20%;
+    background-color: tomato;
+}
